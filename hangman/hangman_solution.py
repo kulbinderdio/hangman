@@ -89,6 +89,9 @@ class Hangman:
 
         else:
             self.num_lives = self.num_lives-1
+            print(f'Sorry, {letter} is not in the word.')
+            print(f'You have {self.num_lives} lives left.')
+
         # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
         
         # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
@@ -117,7 +120,6 @@ class Hangman:
                     # TODO 1: Assign the letter to a variable called `letter`
                     letter = userInput.lower()
         self.list_letters.append(letter)
-        print(letter)
         self.check_letter(letter)
         self.print_guessed_word()
 
@@ -133,7 +135,7 @@ def play_game(word_list):
     game = Hangman(word_list, num_lives=5)
     # TODO 1: To test this task, you can call the ask_letter method
     while game.num_lives > 0 and game.word != game.word_guessed:
-        print (f"lives = {game.num_lives}")
+        # print (f"lives = {game.num_lives}")
         game.ask_letter()
 
     if game.num_lives == 0:
