@@ -42,27 +42,22 @@ class Hangman:
         Asks the user for a letter.
     '''
     
-    
-    def print_guessed_word(self):
-        print("['"+"','".join(self.word_guessed)+"']")
-
 
 
     def __init__(self, word_list, num_lives=5):
         # TODO 2: Initialize the attributes as indicated in the docstring
         self.word = random.choice(word_list)
-        self.word_guessed = '-'*len(self.word)
+        self.word_guessed =list('-'*len(self.word))
         self.list_letters=[]
-        self.num_letters = len(set(self.word))
+        self.num_letters = len(set(list(self.word)))
         self.num_lives = num_lives
-
-        print(self.word)
 
         # TODO 2: Print two message upon initialization:
         # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
         # 2. {word_guessed}
         print(f"The mystery word has {len(self.word)} characters")
-        self.print_guessed_word()
+        # self.print_guessed_word()
+        print(self.word_guessed)
         pass
 
     def check_letter(self, letter):
@@ -81,11 +76,12 @@ class Hangman:
         if letter in self.word:
             print (f"Nice! {letter} is in the word!")
             # Replace all occurances of letter
-            temp = list(self.word_guessed)
+            # temp = self.word_guessed
             for i in range(len(self.word)):
                 if self.word[i] == letter:
-                    temp[i] = letter
-            self.word_guessed = "".join(temp)
+                    self.word_guessed[i] = letter
+            # self.word_guessed = "".join(temp)
+
 
         else:
             self.num_lives = self.num_lives-1
@@ -121,8 +117,8 @@ class Hangman:
                     letter = userInput.lower()
         self.list_letters.append(letter)
         self.check_letter(letter)
-        self.print_guessed_word()
-
+        # self.print_guessed_word()
+        print(self.word_guessed)
         
 
         # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
@@ -134,13 +130,13 @@ def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     # TODO 1: To test this task, you can call the ask_letter method
-    while game.num_lives > 0 and game.word != game.word_guessed:
+    while game.num_lives > 0 and game.word != "".join(game.word_guessed):
         # print (f"lives = {game.num_lives}")
         game.ask_letter()
 
     if game.num_lives == 0:
         print(f"You ran out of lives. The word was {game.word}")
-    if game.word == game.word_guessed:
+    if game.word == "".join(game.word_guessed):
         print("Congratulations, you won!")
 
     # TODO 2: To test this task, upon initialization, two messages should be printed 
