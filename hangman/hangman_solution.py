@@ -41,7 +41,20 @@ class Hangman:
     ask_letter()
         Asks the user for a letter.
     '''
-    
+    def display_hangman(self,lives):
+        stages = ['''
+                    ----------
+                    |        |
+                    |        O
+                    |       \|/ 
+                    |        |
+                    |        /\\
+                    |
+                    -''',
+        '''
+        
+        ''']
+        print(stages[lives])
 
 
     def __init__(self, word_list, num_lives=5):
@@ -136,6 +149,7 @@ def play_game(word_list):
 
     if game.num_lives == 0:
         print(f"You ran out of lives. The word was {game.word}")
+        game.display_hangman(0)
     if game.word == "".join(game.word_guessed):
         print("Congratulations, you won!")
 
